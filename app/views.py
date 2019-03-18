@@ -25,11 +25,14 @@ def profile():
         location = form.location.data
         bio = form.biography.data
         filename = secure_filename(photo.filename)
-        phot.save(os.path.join(
+        photo.save(os.path.join(
             app.config["UPLOAD_FOLDER"],filename
 
         ))
         created_on = getDate()
+        user= Users(created_on,name,location,filename,gender,email,bio)
+        db.session.add(user)
+        db.session.commit()
         flash("SUCCESS")
         return redirect(url_for("home"))
     return render_template("profile.html", form=form)
