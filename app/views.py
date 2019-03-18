@@ -5,7 +5,7 @@ import datetime
 from werkzeug.utils import secure_filename
 import os
 from app import db
-
+from app.models import Users
 
 @app.route('/')
 def home():
