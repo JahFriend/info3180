@@ -1,4 +1,4 @@
-#!/home/jahson/Desktop/info3180-project1/venv/bin/python
+#!/home/ubuntu/workspace/venv/bin/python3.5
 # EASY-INSTALL-ENTRY-SCRIPT: 'alembic==1.0.7','console_scripts','alembic'
 __requires__ = 'alembic==1.0.7'
 import re

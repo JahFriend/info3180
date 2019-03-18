@@ -14,7 +14,7 @@ def home():
 
 
 
-@app.route("/profile", methods=["GET", "POST"])
+@app.route("/profile",methods=["GET","POST"])
 def profile():
     form = ProfileForm()
     if request.method == "POST" and form.validate_on_submit():
@@ -24,16 +24,33 @@ def profile():
         email = form.email.data
         location = form.location.data
         bio = form.biography.data
+        
         filename = secure_filename(photo.filename)
         photo.save(os.path.join(
-            app.config["UPLOAD_FOLDER"],filename
-
+            app.config['UPLOAD_FOLDER'], filename
         ))
+        #print(os.path.join(
+          #  app.config['UPLOAD_FOLDER'], filename
+        #))
         created_on = getDate()
-        user= Users(created_on,name,location,filename,gender,email,bio)
+        user = Users(created_on,name,location,filename,gender,email,bio)
+        
         db.session.add(user)
         db.session.commit()
-        flash("SUCCESS")
-        return redirect(url_for("home"))
-    return render_template("profile.html", form=form)
         
+        flash("user was successfully added",'success')
+        return redirect(url_for("home"))
+    print(form.errors)
+    return render_template("profile.html",form = form)
+    
+
+def format_date_joined(date):
+    return  "joined " + date
+
+
+def getDate():
+    now = datetime.datetime.now()
+    return now.strftime("%B %d,%Y")
+
+if __name__ == '__main__':
+    app.run(debug=True, host="0.0.0.0", port="8080")
