@@ -44,6 +44,26 @@ def profile():
     return render_template("profile.html",form = form)
     
 
+
+@app.route("/profile/<userid>")
+def profile2(userid):
+    user = Users.query.get(userid)
+    name = user.name
+    created_on = user.created_on
+    location = user.location
+    filename = user.img
+    gender = user.gender
+    email = user.email
+    bio = user.bio
+    
+    return render_template("profileid.html",user=user,name=name,created=created_on,location=location,filename=filename,gender=gender,email=email,bio=bio)
+
+@app.route("/profiles")
+def profiles():
+    user = Users.query.all()
+    return render_template("profiles.html",user=user)
+
+
 def format_date_joined(date):
     return  "joined " + date
 

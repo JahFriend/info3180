@@ -1,0 +1,32 @@
+
+{% block main %}
+
+{% include 'flash_messages.html' %}
+
+{% for i in user %}
+
+<div id= "card">
+        <section class="section">
+            <div class="top">
+                <div class="image">
+                    
+                    <img src="{{ url_for('static', filename="uploads/" + i.img) }}" alt="" class="responsive">
+    
+                </div>
+    
+                <div>
+                    <h4> {{ i.name }} </h4>
+                    <p> <p style="display:inline"><img src="{{ url_for('static',filename = 'css_images/avatar.svg') }}" alt=""> {{ i.gender }} </p>
+                    <p > <p style="display:inline"><img src="{{ url_for('static',filename = 'css_images/you-are-here.svg') }}" alt=""></p> {{ i.location }}</p>
+                    
+                </div>
+                <div class="finish">
+                    <a href='{{ url_for("profile2",userid=i.id) }}' class="btn btn-success"> View Profile </a>
+                </div>
+            </div>
+            
+        </section>
+    </div>
+{% endfor %}
+
+{% endblock %}
